@@ -1,0 +1,58 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>Welcome to the DHBW Microblog</title>
+      {% endif %}
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+      <style>
+          #container{
+              display: flex;
+              flex: 1 1 100%;
+          }
+          #left{
+              flex: 1 0 25%;
+          }
+          #center{
+              flex: 1 1 75%;
+          }
+          body{
+            font-family: 'Roboto Mono', monospace;
+          }
+      </style>
+
+    </head>
+    <body>
+    <div id="container">
+      <div id="left">
+        <ul style="list-style: none;">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_anonymous %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register Here!</a></li>
+            {% else %}
+            <li><a href="{{ url_for('statistics') }}">Statistics</a></li>
+            <li><a href="/user/{{ current_user.name }}">Profile</a></li>
+            <li><a href="{{ url_for('submit') }}">Submit a Post</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+        
+      </div>
+      <div id="center">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <ul>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    </body>
+</html>

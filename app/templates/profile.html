@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1><b>{{ user.name }}</b> - Profile</h1>
+{% for post in user.posts %}
+    <table style="border: 1px solid black;width: 50%">
+        <tr style="border: 1px solid black;"><td style="border: 1px solid black;">{{ post.title }}</td></tr>
+        <tr style="border: 1px solid black;"><td style="border: 1px solid black;">{{ post.text }}</td></tr>
+        <tr style="border: 1px solid black;">
+            <td style="border: 1px solid black;">
+                {% for tag in post.tags %}
+                    {{ tag.name }}, 
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <br>
+{% endfor %}
+{% endblock %}

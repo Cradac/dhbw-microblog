@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Posts per User</h1>
+    {{ posts_per_user | safe}}
+    <h1>Popular Tags</h1>
+    {{ tag_frequency | safe}}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+        <table style="border: 1px solid black;width: 50%">
+            <tr style="border: 1px solid black;"><td style="border: 1px solid black;">{{ post[0].title }} <i>by <a href="user/{{ post[1].name }}">{{ post[1].name }}</a></i></td></tr>
+            <tr style="border: 1px solid black;"><td style="border: 1px solid black;">{{ post[0].text }}</td></tr>
+            <tr style="border: 1px solid black;">
+                <td style="border: 1px solid black;">
+                    {% for tag in post[0].tags %}
+                        {{ tag.name }}, 
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+        <br>
+    {% endfor %}
+{% endblock %}
